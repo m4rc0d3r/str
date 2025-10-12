@@ -10,6 +10,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
+    "@types/npm-packlist": "^7.0.3",
+    "npm-packlist": "^10.0.2",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1"
   },
