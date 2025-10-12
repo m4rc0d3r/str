@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "unbuild",
+    "listOfFilesToPublish": "jiti release/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
+    "@types/node": "^24.7.2",
     "@types/npm-packlist": "^7.0.3",
+    "@types/npmcli__arborist": "^6.3.1",
+    "jiti": "^2.6.1",
     "npm-packlist": "^10.0.2",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1"
@@ -26,5 +30,8 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@npmcli/arborist": "^9.1.6"
+  }
 }
