@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Node.js Package 4
+name: Node.js Package 5
 
 on:
   push:
@@ -12,19 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout build repo
+      - name: Checkout 1st
         uses: actions/checkout@v4
         with:
-          path: source
-      - name: First dir
+          path: main
+      - name: 1st dir
         run: pwd
 
-      - name: Checkout build repo
+      - name: Checkout 2nd
         uses: actions/checkout@v4
         with:
           repository: m4rc0d3r/str-dist2
-          token: ${{ secrets.FULL_ACCESS_TO_STR_DIST_REPO }} # PAT с доступом к my-lib-build
-          path: dist
-
-      - name: Second dir
-        run: pwd
+          path: secondary
+      - name: 2nd dir
+        run: |
+          pwd
+          cd ..
+          pwd
