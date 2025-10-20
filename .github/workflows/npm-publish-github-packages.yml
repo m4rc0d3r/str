@@ -25,7 +25,6 @@ jobs:
         with:
           repository: m4rc0d3r/str-dist
           path: build-repo
-          token: ${{ secrets.FULL_ACCESS_TO_STR_DIST_REPO }} # PAT с доступом к my-lib-build
 
       - name: Sync build artifacts
         run: |
