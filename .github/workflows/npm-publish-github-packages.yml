@@ -19,7 +19,7 @@ jobs:
           node-version: 20
       - run: pnpm i
       - run: pnpm build
-      
+
       - name: Checkout build repo
         uses: actions/checkout@v4
         with:
@@ -29,7 +29,7 @@ jobs:
 
       - name: Sync build artifacts
         run: |
-          rm -rf build-repo/*
+          find build-repo -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           pnpm --silent listOfFilesToPublish | xargs -I {} cp --parents "{}" build-repo
           cd build-repo
           git config user.name "github-actions[bot]"
