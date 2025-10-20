@@ -1,0 +1,41 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+on:
+  push:
+    tags:
+      - "v*.*.*" # триггер на пуш тега вида v1.2.3
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm i -g -f corepack && corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: pnpm i
+      - run: pnpm build
+      
+      - name: Checkout build repo
+        uses: actions/checkout@v4
+        with:
+          repository: m4rc0d3r/str-dist
+          path: build-repo
+          token: ${{ secrets.FULL_ACCESS_TO_STR_DIST_REPO }} # PAT с доступом к my-lib-build
+
+      - name: Sync build artifacts
+        run: |
+          rm -rf build-repo/*
+          pnpm --silent listOfFilesToPublish | xargs -I {} cp --parents "{}" build-repo
+          cd build-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Release $GITHUB_REF_NAME" || echo "No changes"
+          git tag -f $GITHUB_REF_NAME
+          git push origin main
+          git push origin $GITHUB_REF_NAME
