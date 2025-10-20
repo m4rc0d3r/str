@@ -27,5 +27,7 @@ jobs:
       - name: 2nd dir
         run: |
           pwd
+          ls -ali
           cd ..
           pwd
+          ls -ali
