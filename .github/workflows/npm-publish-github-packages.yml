@@ -37,5 +37,5 @@ jobs:
           git add .
           git commit -m "Release $GITHUB_REF_NAME" || echo "No changes"
           git tag -f $GITHUB_REF_NAME
-          git push origin main
+          git push origin master
           git push origin $GITHUB_REF_NAME
